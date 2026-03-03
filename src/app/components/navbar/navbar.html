@@ -1,7 +1,19 @@
-<nav>
-    <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/game">Game</a></li>
-        <li><a routerLink="/highscore">Highscore</a></li>
+@if (sessionService.currentUser()) {
+  <nav class="navbar">
+    <div class="navbar-brand">
+        <a routerLink="/">Welcome {{ sessionService.currentUser() }}</a>
+    </div>
+    <ul class="navbar-links">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a routerLink="/game" routerLinkActive="active">Game</a></li>
+        <li><a routerLink="/highscore" routerLinkActive="active">Highscore</a></li>
+        <li><button class="logout-button" (click)="onLogout()">Logout</button></li>
     </ul>
-</nav>
+  </nav>
+} @else {
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a>Rock Paper Scissors game</a>
+        </div>
+    </nav>
+}
