@@ -30,7 +30,7 @@ export class Login {
       this.SessionsService.login(name);
       this.firebaseService.saveUser(name, newPlayerData);
       this.router.navigate(['/game']);
-      // save name to LS and navigate to game
+      
     } else {
       alert('Username is required');}
   }

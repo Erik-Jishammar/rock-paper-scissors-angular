@@ -5,3 +5,29 @@
     align-items: center;
     min-height: 60vh;
 }
+
+.highscore-board {
+    background-color: white;
+    padding: 1.5rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    text-align: center;
+}
+
+.highscore-board h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4a4a4a;
+    letter-spacing: -0.01em;
+}
+
+.highscore-board h3 span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-top: 0.5rem;
+}
