@@ -3,6 +3,7 @@ import { ChoiceButtons } from '../../components/choice-buttons/choice-buttons';
 import { FirebaseService } from '../../services/firebase.service';
 import { SessionService } from '../../services/session.service';
 import { Player } from '../../model/player.model';
+import { GameResult } from '../../components/game-result/game-result';
 
 
 @Component({
@@ -14,11 +15,38 @@ import { Player } from '../../model/player.model';
 export class Game {
   firebaseService = inject(FirebaseService);
   sessionService = inject(SessionService);
+ 
   highScore = signal(0);
   currentScore = signal(0);
-  sessionHighSore = signal(0);
+  sessionHighScore = signal(0);
 
-  constructor(){
+  userChoice = signal(''); 
+  computerChoice = signal(''); 
+  result = signal('');
+  computerOptions = ['rock','paper', 'scissors'];
+
+  play(choice:string){
+    this.userChoice.set(choice);
+    const randomChoice = Math.floor(Math.random()* this.computerOptions.length) // cal random index/num
+    const cpuChoice = this.computerOptions[randomChoice] // collect string from arr
+    this.computerChoice.set(cpuChoice); // update signal
+
+    let gameResult = '';
+    if(choice === cpuChoice){
+      gameResult = 'Draw'
+    } else if(
+    (choice === 'rock' && cpuChoice === 'scissors') ||
+    (choice === 'paper' && cpuChoice === 'rock') ||
+    (choice === 'scissors' && cpuChoice === 'paper') ) {
+      gameResult = 'You win!'
+    } else {
+      gameResult = 'LOSER!'
+    }
+    this.result.set(gameResult);
+  }
+    
+  
+    constructor(){
   
     const name = this.sessionService.currentUser();
     if(name){
