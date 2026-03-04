@@ -14,7 +14,10 @@
     <div class="player">
         <p>You chose: {{userChoice()}}</p>
     </div>
-    <div class="result">
+    <div class="result"
+        [class.win]="result() === 'You win!'"
+        [class.lose]="result() === 'LOSER!'"
+        [class.draw]="result() === 'Draw'">
         <p>Result: {{result()}}</p>
     </div>
     <div class="computer">

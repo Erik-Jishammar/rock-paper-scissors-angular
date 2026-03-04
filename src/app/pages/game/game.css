@@ -81,6 +81,19 @@
     min-width: 200px;
 
 }
+.win {
+    background-color: rgb(128, 196, 128);
+    border: 2px solid #28a745;
+}
+.lose {
+    background-color: rgb(221, 88, 88);
+    border: 2px solid #dc3545;
+}
+.draw {
+    background-color: rgb(240, 240, 164);
+    border: 2px solid #f0d070;
+
+}
 
 /* Responsiv layout för mindre skärmar */
 @media (max-width: 768px) {
