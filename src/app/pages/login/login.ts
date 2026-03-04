@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Player } from '../../model/player.model';
+
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],

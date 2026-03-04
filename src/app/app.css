@@ -1,6 +1,20 @@
-h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #2e2e2e;
+header {
+    background-color: transparent;
+}
+
+main {
+    flex: 1;
+    background-color: #f0f2f5;
+}
+
+footer {
+    background-color: #141619;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.875rem;
+}
+
+footer p {
+    margin: 0;
 }
