@@ -15,10 +15,16 @@ export class App {
   private fb = inject(FirebaseService);
 
   constructor(){
-    this.fb.saveUser('testing FB').then(()=>{
-      console.log('Firebase testing success');
+    /*
+    const testName = 'test-' + new Date().getTime();
+    this.fb.saveUser(testName, {
+      highScore: 99,
+      lastUpdated: new Date().toISOString(),
+    }).then(()=>{
+      console.log('Firebase SUCCESS - Check for:', testName);
     }).catch((error)=>{
-      console.log('Firebase testing failed', error);
+      console.log('Firebase FAILED', error);
     })
+    */
   }
 }

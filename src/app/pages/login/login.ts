@@ -3,6 +3,7 @@ import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
+import { Player } from '../../model/player.model';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -21,9 +22,12 @@ export class Login {
   login(){
     const name = this.loginForm.value.username;
     if(name?.trim()){
-      
+      const newPlayerData = {
+        highScore: 0,
+        lastUpdated: new Date().toISOString(),
+      }
       this.SessionsService.login(name);
-      this.firebaseService.saveUser(name);
+      this.firebaseService.saveUser(name, newPlayerData);
       this.router.navigate(['/game']);
       // save name to LS and navigate to game
     } else {
