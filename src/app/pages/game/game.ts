@@ -15,6 +15,8 @@ export class Game {
   firebaseService = inject(FirebaseService);
   sessionService = inject(SessionService);
   highScore = signal(0);
+  currentScore = signal(0);
+  sessionHighSore = signal(0);
 
   constructor(){
   

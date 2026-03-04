@@ -1,4 +1,24 @@
-<div class="highscore-board">
-    <h3>Your highscore <span>{{highScore()}}</span></h3>
+<div class="score-board">
+    <div class="score-item">
+        <h3>Your stored highscore <span>{{highScore()}}</span></h3>
+    </div>
+    <div class="score-item">
+        <h3>Your current score <span>{{currentScore()}}</span></h3>
+    </div>
+    <div class="score-item">
+        <h3>Your session record <span>{{sessionHighSore()}}</span></h3>
+    </div>
+</div>
+<div class="game-board">
+
+    <div class="player">
+        <p>You chose</p>
+    </div>
+    <div class="result">
+        <p>Result</p>
+    </div>
+    <div class="computer">
+        <p>Computer chose</p>
+    </div>
 </div>
 <app-choice-buttons></app-choice-buttons>
