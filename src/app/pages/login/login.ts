@@ -23,12 +23,12 @@ export class Login {
   login(){
     const name = this.loginForm.value.username;
     if(name?.trim()){
-      const newPlayerData = {
-        highScore: 0,
-        lastUpdated: new Date().toISOString(),
-      }
+      // const newPlayerData = {
+      //   highScore: 0,
+      //   lastUpdated: new Date().toISOString(),
+      // }
       this.SessionsService.login(name);
-      this.firebaseService.saveUser(name, newPlayerData);
+      // this.firebaseService.saveUser(name, newPlayerData); 
       this.router.navigate(['/game']);
       
     } else {

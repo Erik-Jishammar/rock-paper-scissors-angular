@@ -40,6 +40,25 @@ export class Game {
     (choice === 'paper' && cpuChoice === 'rock') ||
     (choice === 'scissors' && cpuChoice === 'paper') ) {
       gameResult = 'You win!'
+
+      const currentValue = this.currentScore(); 
+      this.currentScore.set( currentValue + 1); // increment current score
+
+      if(this.currentScore() > this.highScore()){
+          this.sessionHighScore.set(this.currentScore()); // check if CS beats the stored highscore and updaet scores locally
+          this.highScore.set(this.currentScore());
+          
+          const name = this.sessionService.currentUser(); // prep data for FB
+          if(name){
+            const newData: Player = {
+              highScore: this.currentScore(),
+              lastUpdated: new Date().toISOString()
+            };
+            this.firebaseService.saveUser(name, newData); // save the new highscore to db
+          }
+      }
+
+
     } else {
       gameResult = 'LOSER!'
     }
@@ -71,4 +90,3 @@ export class Game {
     }
   }
 }
-
