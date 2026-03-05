@@ -1,27 +1,20 @@
-<div class="score-board">
-    <div class="score-item">
-        <h3>Your stored highscore <span>{{highScore()}}</span></h3>
-    </div>
-    <div class="score-item">
-        <h3>Your current score <span>{{currentScore()}}</span></h3>
-    </div>
-    <div class="score-item">
-        <h3>Your session record <span>{{sessionHighScore()}}</span></h3>
-    </div>
-</div>
-<div class="game-board">
+<app-scoreboard
+  [highScore]="highScore()"
+  [currentScore]="currentScore()"
+  [sessionHighScore]="sessionHighScore()"
+>
+</app-scoreboard>
 
-    <div class="player">
-        <p>You chose: {{userChoice()}}</p>
-    </div>
-    <div class="result"
-        [class.win]="result() === 'You win!'"
-        [class.lose]="result() === 'LOSER!'"
-        [class.draw]="result() === 'Draw'">
-        <p>Result: {{result()}}</p>
-    </div>
-    <div class="computer">
-        <p>Computer chose: {{computerChoice()}}</p>
-    </div>
+<div class="game-board">
+  <div class="player">
+    <p>You chose: {{ userChoice() }}</p>
+  </div>
+  
+  <app-game-result [result]="result()"> </app-game-result>
+  
+  <div class="computer">
+    <p>Computer chose: {{ computerChoice() }}</p>
+  </div>
 </div>
+
 <app-choice-buttons (SelectedChoice)="play($event)"></app-choice-buttons>

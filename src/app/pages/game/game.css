@@ -6,54 +6,7 @@
     min-height: 60vh;
 }
 
-.score-board {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch; 
-    background-color: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    text-align: center;
-    width: 100%;
-    max-width: 800px; 
-}
 
-.score-board h3 {
-    margin: 0;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    color: #888;
-    line-height: 1.4;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.score-board h3 span {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-top: auto; 
-    padding-top: 0.5rem;
-}
-
-.score-item{
-    flex: 1;
-    border-left: 1px solid #f0f0f0;
-    padding: 0 1.5rem;
-    min-width: 200px; 
-}
-
-.score-item:first-child{
-    border-left: none;
-}
 .game-board{
     display:flex;
     justify-content: center;
@@ -71,7 +24,7 @@
     margin-bottom: 1rem;
 
 }
-.player, .computer, .result{
+.player, .computer{
     flex: 1;
     background-color: white;
     padding: 2rem;
@@ -81,41 +34,11 @@
     min-width: 200px;
 
 }
-.win {
-    background-color: rgb(128, 196, 128);
-    border: 2px solid #28a745;
-}
-.lose {
-    background-color: rgb(221, 88, 88);
-    border: 2px solid #dc3545;
-}
-.draw {
-    background-color: rgb(240, 240, 164);
-    border: 2px solid #f0d070;
 
-}
 
-/* Responsiv layout för mindre skärmar */
+
 @media (max-width: 768px) {
-    .score-board {
-        flex-direction: column;
-        gap: 2rem;
-        padding: 2rem 1rem;
-        width: 80%;
-    }
-
-    .score-item {
-        border-left: none;
-        border-top: 1px solid #f0f0f0;
-        padding: 1.5rem 0 0 0;
-        min-width: unset;
-    }
-
-    .score-item:first-child {
-        border-top: none;
-        padding-top: 0;
-    }
-
+  
     .game-board {
         flex-direction: column;
         gap: 1.5rem;

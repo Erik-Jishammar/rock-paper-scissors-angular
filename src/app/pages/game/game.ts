@@ -4,11 +4,12 @@ import { FirebaseService } from '../../services/firebase.service';
 import { SessionService } from '../../services/session.service';
 import { Player } from '../../model/player.model';
 import { GameResult } from '../../components/game-result/game-result';
+import { Scoreboard } from "../../components/scoreboard/scoreboard";
 
 
 @Component({
   selector: 'app-game',
-  imports: [ChoiceButtons],
+  imports: [ChoiceButtons, Scoreboard, GameResult],
   templateUrl: './game.html',
   styleUrl: './game.css',
 })

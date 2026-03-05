@@ -1,1 +1,6 @@
-<p>game-result works!</p>
+<div class="result"
+     [class.win]="result === 'You win!'"
+     [class.lose]="result === 'LOSER!'"
+     [class.draw]="result === 'Draw'">
+    <p>Result: {{result}}</p>
+</div>
