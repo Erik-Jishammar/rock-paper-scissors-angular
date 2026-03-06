@@ -7,6 +7,7 @@ import { GameResult } from '../../components/game-result/game-result';
 import { Scoreboard } from "../../components/scoreboard/scoreboard";
 
 
+
 @Component({
   selector: 'app-game',
   imports: [ChoiceButtons, Scoreboard, GameResult],
@@ -74,7 +75,8 @@ export class Game implements OnDestroy {
     this.computerChoice.set(''); 
     this.result.set('');
   }
-    
+
+
   
   constructor(){
     const name = this.sessionService.currentUser();
@@ -95,6 +97,7 @@ export class Game implements OnDestroy {
         }
       });
     }
+    
   }
 
   ngOnDestroy() {

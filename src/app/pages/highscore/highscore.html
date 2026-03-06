@@ -1,1 +1,7 @@
-<p>highscore works!</p>
+<div>
+    <ul>
+        @for(player of topPlayers(); track player.name){
+            <li>{{player.name}}: {{player.highScore}}</li>
+        }
+    </ul>
+</div>

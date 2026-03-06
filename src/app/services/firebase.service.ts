@@ -26,4 +26,12 @@ export class FirebaseService {
             callback(data);
         });
     }
+
+    getAllPlayers(): Promise<any> {
+        const useRef = ref(this.db, 'players');
+        return get(useRef).then((snapshot) => {
+            console.log('All players:', snapshot.val());
+            return snapshot;
+        });
+    }
 }
