@@ -1,7 +1,12 @@
-<div>
-    <ul>
-        @for(player of topPlayers(); track player.name){
-            <li>{{player.name}}: {{player.highScore}}</li>
+<div class="highscore-container">
+    <h2>Leaderboard <i class="fa-solid fa-crown"></i></h2>
+    <div class="leaderboard-list">
+        @for(player of topPlayers(); track player.name) {
+            <div class="list-item">
+                <span class="name">{{ player.name }}</span>
+                <span class="separator"></span>
+                <span class="score">{{ player.highScore }}</span>
+            </div>
         }
-    </ul>
+    </div>
 </div>
