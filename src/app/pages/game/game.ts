@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnDestroy } from '@angular/core';
 import { ChoiceButtons } from '../../components/choice-buttons/choice-buttons';
 import { FirebaseService } from '../../services/firebase.service';
 import { SessionService } from '../../services/session.service';
@@ -13,7 +13,7 @@ import { Scoreboard } from "../../components/scoreboard/scoreboard";
   templateUrl: './game.html',
   styleUrl: './game.css',
 })
-export class Game {
+export class Game implements OnDestroy {
   firebaseService = inject(FirebaseService);
   sessionService = inject(SessionService);
  
@@ -25,6 +25,8 @@ export class Game {
   computerChoice = signal(''); 
   result = signal('');
   computerOptions = ['rock','paper', 'scissors'];
+
+  private unsubscribe?: any; // save subscription
 
   play(choice:string){
     this.userChoice.set(choice);
@@ -47,7 +49,7 @@ export class Game {
       if(this.currentScore() > this.highScore()){
           this.sessionHighScore.set(this.currentScore()); // check if CS beats the stored highscore and updaet scores locally
           this.highScore.set(this.currentScore());
-          
+
           const name = this.sessionService.currentUser(); // prep data for FB
           if(name){
             const newData: Player = {
@@ -57,36 +59,39 @@ export class Game {
             this.firebaseService.saveUser(name, newData); // save the new highscore to db
           }
       }
-
-
-    } else {
+        } else {
       gameResult = 'LOSER!'
     }
     this.result.set(gameResult);
   }
     
   
-    constructor(){
-  
+  constructor(){
     const name = this.sessionService.currentUser();
     if(name){
-      this.firebaseService.getUser(name)
-      .then((snapshot)=> {
-        if(snapshot.exists()){
-          const data = snapshot.val() as Player; 
-          // update signal with data from db
+      // run listener
+      this.unsubscribe = this.firebaseService.listenToUser(name, (data) => {
+        if(data) {
           this.highScore.set(data.highScore);
-          console.log(data.highScore);
-      } else {
-        const newPlayerData : Player = { // create new player with highscore 0
-          highScore: 0,
-          lastUpdated: new Date().toISOString()
-        };
-        this.firebaseService.saveUser(name, newPlayerData);
-        console.log('New player created in firebase');
-        
-      }
-      })
+          console.log('Realtime Update', data.highScore);
+        } else {
+          // if player doesnt exist we create a new one
+          const newPlayerData : Player = {
+            highScore: 0,
+            lastUpdated: new Date().toISOString()
+          };
+          this.firebaseService.saveUser(name, newPlayerData);
+          console.log('new player created in fb');
+        }
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    // cleanup
+    if(this.unsubscribe) {
+      this.unsubscribe();
+      
     }
   }
 }

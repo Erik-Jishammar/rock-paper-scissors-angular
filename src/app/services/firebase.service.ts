@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { Database} from '@angular/fire/database';
-import { ref, set, get } from 'firebase/database';
+import { Database } from '@angular/fire/database';
+import { ref, set, get, onValue } from 'firebase/database';
 import { Player } from '../model/player.model';
 
 @Injectable({ providedIn: 'root' })
@@ -18,6 +18,12 @@ export class FirebaseService {
         const useRef = ref(this.db,'players/' + username);
         return get(useRef);
     }
-    
+    listenToUser(username:string, callback: (player:any)=> void){
+         const useRef = ref(this.db,'players/' + username);
 
+         return onValue(useRef, (snapshot)=> {
+            const data = snapshot.val();
+            callback(data);
+        });
+    }
 }
