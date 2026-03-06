@@ -28,6 +28,7 @@ export class Game implements OnDestroy {
 
   private unsubscribe?: any; // save subscription
 
+
   play(choice:string){
     this.userChoice.set(choice);
     const randomChoice = Math.floor(Math.random()* this.computerOptions.length) // cal random index/num
@@ -63,6 +64,15 @@ export class Game implements OnDestroy {
       gameResult = 'LOSER!'
     }
     this.result.set(gameResult);
+  }
+
+  resetSession(){
+    this.currentScore.set(0);
+    this.sessionHighScore.set(0);
+    // clean ui
+    this.userChoice.set('');
+    this.computerChoice.set(''); 
+    this.result.set('');
   }
     
   

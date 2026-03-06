@@ -15,6 +15,13 @@
   <div class="computer">
     <p>Computer chose: {{ computerChoice() }}</p>
   </div>
+  
 </div>
+
+@if (currentScore() > 0) {
+  <div class="reset-score">
+    <button (click)="resetSession()">Reset score</button>
+  </div>
+}
 
 <app-choice-buttons (SelectedChoice)="play($event)"></app-choice-buttons>

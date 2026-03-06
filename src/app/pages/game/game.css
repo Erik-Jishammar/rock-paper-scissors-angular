@@ -24,6 +24,48 @@
     margin-bottom: 1rem;
 
 }
+.player, .reset-score {
+    margin-top: -1rem;
+    margin-bottom: 2.5rem;
+    animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reset-score button {
+    background: none;
+    border: 1.5px solid #eee;
+    color: #888;
+    padding: 0.75rem 1.5rem;
+    border-radius: 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reset-score button:hover {
+    background-color: #fafafa;
+    border-color: #ccc;
+    color: #444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reset-score button:active {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
 .player, .computer{
     flex: 1;
     background-color: white;
@@ -34,7 +76,13 @@
     min-width: 200px;
 
 }
+.reset-button{
+    background-color: transparent;
+    margin-top: -1rem;
+    border: 1px solid;
+    border-radius: 8px;
 
+}
 
 
 @media (max-width: 768px) {
