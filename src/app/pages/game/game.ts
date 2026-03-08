@@ -27,13 +27,12 @@ export class Game implements OnDestroy {
   result = signal('');
   computerOptions = ['rock','paper', 'scissors'];
 
-  private unsubscribe?: any; // save subscription
-
+  private unsubscribe?: any; // store subscription for cleanup
 
   play(choice:string){
     this.userChoice.set(choice);
-    const randomChoice = Math.floor(Math.random()* this.computerOptions.length) // cal random index/num
-    const cpuChoice = this.computerOptions[randomChoice] // collect string from arr
+    const randomChoice = Math.floor(Math.random()* this.computerOptions.length); // calculate random index
+    const cpuChoice = this.computerOptions[randomChoice]; // get random choice from array
     this.computerChoice.set(cpuChoice); // update signal
 
     let gameResult = '';
@@ -49,10 +48,10 @@ export class Game implements OnDestroy {
       this.currentScore.set( currentValue + 1); // increment current score
 
       if(this.currentScore() > this.highScore()){
-          this.sessionHighScore.set(this.currentScore()); // check if CS beats the stored highscore and updaet scores locally
+          this.sessionHighScore.set(this.currentScore()); // updte highscore locally if current score is higher
           this.highScore.set(this.currentScore());
 
-          const name = this.sessionService.currentUser(); // prep data for FB
+          const name = this.sessionService.currentUser(); // format data for Firebase
           if(name){
             const newData: Player = {
               highScore: this.currentScore(),
@@ -62,9 +61,9 @@ export class Game implements OnDestroy {
           }
       }
         } else {
-      gameResult = 'LOSER!'
+      gameResult = 'LOSER!';
       const currentValue = this.currentScore();
-      this.currentScore.set(Math.max(0, currentValue - 1)); // decrement current if lose, but not below 0
+      this.currentScore.set(Math.max(0, currentValue - 1)); // decrement current score if loss, clamped to 0
     }
     this.result.set(gameResult);
   }
@@ -83,13 +82,13 @@ export class Game implements OnDestroy {
   constructor(){
     const name = this.sessionService.currentUser();
     if(name){
-      // run listener
+      // subscribe to realtime database updates
       this.unsubscribe = this.firebaseService.listenToUser(name, (data) => {
         if(data) {
           this.highScore.set(data.highScore);
           // console.log('Realtime Update', data.highScore);
         } else {
-          // if player doesnt exist we create a new one
+          // create a new player record if none exists
           const newPlayerData : Player = {
             highScore: 0,
             lastUpdated: new Date().toISOString()
@@ -106,7 +105,6 @@ export class Game implements OnDestroy {
     // cleanup
     if(this.unsubscribe) {
       this.unsubscribe();
-      
     }
   }
 }

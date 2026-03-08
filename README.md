@@ -13,7 +13,7 @@ The app is connected to a Firebase Realtime Database.
 Configuration for Firebase is handled through `@angular/fire` and loaded via `app.config.ts`. 
 
 ## Database Structure Used
-The game stores the highest score of each player using their unique username from the local login session.
+The game stores the highest score of each player using username from the local login session.
 
 The data model structure in the Realtime Database looks like this:
 
@@ -32,11 +32,11 @@ Example of a saved player object:
 ## Score Rule: Clamp to zero
 When the player loses a round, the application deducts 1 point from their `currentScore`. 
 
-I have implemented the **"clamp to minimum 0"** rule.
+I have implemented the "clamp to minimum 0" rule.
 
 ## Extra Features
-1. **Reset Session Score button:** Included in the game UI, allowing the user to reset their current session score to 0 without affecting their stored high score.
-2. **Leaderboard:** A dedicated page at `/highscore` that retrieves all players from the database, sorts them by high score (highest to lowest), and displays a simple leaderboard.
+1. Reset Session Score button: Included in the game UI, allowing the user to reset their current session score to 0 without affecting their stored high score.
+2. Leaderboard: A dedicated page at `/highscore` that retrieves all players from the database, sorts them by high score (highest to lowest), and displays a simple leaderboard.
 
 Both the `/game` and `/highscore` routes are protected using Angular Route Guard (`AuthGuard`) preventing unauthenticated access.
 
