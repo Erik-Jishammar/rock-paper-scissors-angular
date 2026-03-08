@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {Login} from './pages/login/login';
 import {Game} from './pages/game/game';
 import {Highscore} from './pages/highscore/highscore';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
     {
@@ -12,12 +13,14 @@ export const routes: Routes = [
     {
         path: 'game',
         component: Game,
-        title: 'Game'
+        title: 'Game',
+        canActivate: [AuthGuard]
     },
     {
         path: 'highscore',
         component: Highscore,
-        title: 'Highscore'
+        title: 'Highscore',
+        canActivate: [AuthGuard]
     },
     {
         path: '**',

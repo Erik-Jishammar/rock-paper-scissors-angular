@@ -63,6 +63,8 @@ export class Game implements OnDestroy {
       }
         } else {
       gameResult = 'LOSER!'
+      const currentValue = this.currentScore();
+      this.currentScore.set(Math.max(0, currentValue - 1)); // decrement current if lose, but not below 0
     }
     this.result.set(gameResult);
   }
@@ -85,7 +87,7 @@ export class Game implements OnDestroy {
       this.unsubscribe = this.firebaseService.listenToUser(name, (data) => {
         if(data) {
           this.highScore.set(data.highScore);
-          console.log('Realtime Update', data.highScore);
+          // console.log('Realtime Update', data.highScore);
         } else {
           // if player doesnt exist we create a new one
           const newPlayerData : Player = {
@@ -93,7 +95,7 @@ export class Game implements OnDestroy {
             lastUpdated: new Date().toISOString()
           };
           this.firebaseService.saveUser(name, newPlayerData);
-          console.log('new player created in fb');
+          // console.log('new player created in fb');
         }
       });
     }

@@ -11,7 +11,7 @@ export class FirebaseService {
     
     saveUser(username:string, playerData:Player){
         const useRef = ref(this.db,'/players/' + username);
-        console.log('Sending data to:', useRef.toString());
+        // console.log('Sending data to:', useRef.toString());
         return set(useRef,playerData);
     }
     getUser(username:string){
@@ -30,7 +30,7 @@ export class FirebaseService {
     getAllPlayers(): Promise<any> {
         const useRef = ref(this.db, 'players');
         return get(useRef).then((snapshot) => {
-            console.log('All players:', snapshot.val());
+            // console.log('All players:', snapshot.val());
             return snapshot;
         });
     }

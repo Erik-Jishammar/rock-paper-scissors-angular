@@ -1,59 +1,44 @@
-# AngApp
+# Rock-Paper-Scissors (Angular & Firebase)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+This is a Rock-Paper-Scissors application built with Angular and Firebase Realtime Database. The application allows players to log in locally with a username, play against a CPU, and compete for a spot on the leaderboard.
 
-## Development server
+## How to run
+1. Clone or extract the source code into a directory.
+2. Open terminal in the project directory and run `npm install` to install all dependencies needed to run the game.
+3. Start the local development server by running `ng serve`.
+4. Open your browser to `http://localhost:4200/`.
 
-To start a local development server, run:
+## Realtime Database Setup
+The app is connected to a Firebase Realtime Database. 
+Configuration for Firebase is handled through `@angular/fire` and loaded via `app.config.ts`. 
 
-```bash
-ng serve
-```
+## Database Structure Used
+The game stores the highest score of each player using their unique username from the local login session.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The data model structure in the Realtime Database looks like this:
 
-## Code scaffolding
+/players
+  /<username>
+    highScore: number
+    lastUpdated: timestamp (ISOString)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Example of a saved player object:
 
-```bash
-ng generate component component-name
-```
+/players
+  /erik
+    highScore: 12
+    lastUpdated: "2026-03-08T13:46:36.000Z"
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Score Rule: Clamp to zero
+When the player loses a round, the application deducts 1 point from their `currentScore`. 
 
-```bash
-ng generate --help
-```
+I have implemented the **"clamp to minimum 0"** rule.
 
-## Building
+## Extra Features
+1. **Reset Session Score button:** Included in the game UI, allowing the user to reset their current session score to 0 without affecting their stored high score.
+2. **Leaderboard:** A dedicated page at `/highscore` that retrieves all players from the database, sorts them by high score (highest to lowest), and displays a simple leaderboard.
 
-To build the project run:
+Both the `/game` and `/highscore` routes are protected using Angular Route Guard (`AuthGuard`) preventing unauthenticated access.
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

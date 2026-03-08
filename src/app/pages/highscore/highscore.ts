@@ -20,7 +20,7 @@ export class Highscore {
       const allPlayersData = snapshot.val() as any;
 
     const playersArray = Object.entries(allPlayersData)
-    console.log(playersArray);
+    // console.log(playersArray);
 
     const formattedPlayers = playersArray.map((item: any) => {
       return {
